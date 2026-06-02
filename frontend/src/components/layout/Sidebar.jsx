@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { LayoutDashboard, Users, BarChart2, LogOut, TrendingUp } from 'lucide-react'
 import { supabase } from '../../lib/supabaseClient'
 import { useAuth } from '../../contexts/AuthContext'
-import { LogOut } from 'lucide-react'
+// import { LogOut } from 'lucide-react'
 
 const navItems = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard, end: true },
