@@ -25,6 +25,31 @@ Apply the database schema from the repo root (`db/schema.sql`) or `frontend/supa
 npm run dev
 ```
 
+## Deploy on Vercel
+
+This app uses **Vite**, not Create React App — do not use `react-scripts build`.
+
+**Option A — deploy from repo root** (uses `/vercel.json`):
+
+- Root Directory: leave empty (default)
+- Framework Preset: Other (or Vite)
+- Build Command: override **off** (repo `vercel.json` runs `cd frontend && npm run build`)
+
+**Option B — deploy `frontend` only**:
+
+- Root Directory: `frontend`
+- Framework Preset: **Vite**
+- Build Command: `npm run build` (or leave default)
+- Output Directory: `dist`
+- Install Command: `npm install`
+
+In Project Settings → Environment Variables, add:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+
+If you previously set Framework to **Create React App**, change it to **Vite** or **Other** and clear any custom `react-scripts build` override.
+
 Without Supabase env vars, the app runs in **dev mode** (no login required) but queries will fail until credentials are set.
 
 ## Pages
