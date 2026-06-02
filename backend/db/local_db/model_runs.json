@@ -1,0 +1,20 @@
+[
+  {
+    "model_name": "corners_v1",
+    "market": "corners",
+    "accuracy": 0.6666666666666666,
+    "log_loss": 0.7652088513752681,
+    "brier_score": 0.26979665322919294,
+    "training_samples": 28,
+    "id": 1
+  },
+  {
+    "model_name": "cards_v1",
+    "market": "cards",
+    "accuracy": 0.3333333333333333,
+    "log_loss": 0.7295455601960247,
+    "brier_score": 0.268140589569161,
+    "training_samples": 28,
+    "id": 2
+  }
+]
