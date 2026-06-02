@@ -19,7 +19,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from scraper.footystats_scraper import scrape_and_push
 from scraper.reddit_sentiment import get_team_sentiment
-from features.feature_engineering import build_match_features
+from features.feature_engineering import build_match_features, run_feature_pipeline_all
 from db.supabase_client import supabase, insert_prediction
 
 import models.corners_model as corners
@@ -97,7 +97,7 @@ def run_predictions():
         print(f"\n  {home} vs {away} (Fixture ID: {fixture_id}, Date: {match_date})")
 
         try:
-            features = build_match_features(home, away)
+            features = build_match_features(home, away, fixture_id=fixture_id)
         except ValueError as e:
             print(f"  Skipping: {e}")
             continue
@@ -120,16 +120,19 @@ def main():
     print("SPORTY-OPELE PIPELINE")
     print("=" * 50)
 
-    print("\n[1/4] Scraping FootyStats & Seeding Teams...")
+    print("\n[1/5] Scraping FootyStats & Seeding Teams...")
     scrape_and_push()
 
-    print("\n[2/4] Updating sentiment...")
+    print("\n[2/5] Updating sentiment...")
     update_sentiments()
 
-    print("\n[3/4] Running predictions...")
+    print("\n[3/5] Engineering features (processed_features)...")
+    run_feature_pipeline_all()
+
+    print("\n[4/5] Running predictions...")
     run_predictions()
 
-    print("\n[4/4] Done. Check Supabase for latest predictions.")
+    print("\n[5/5] Done. Check Supabase for latest predictions.")
 
 
 if __name__ == "__main__":

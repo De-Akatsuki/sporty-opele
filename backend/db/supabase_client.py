@@ -180,3 +180,8 @@ def get_fixtures_for_date(date: str):
 def log_outcome(outcome_data: dict):
     """Log actual match outcome vs prediction."""
     return supabase.table("prediction_outcomes").insert(outcome_data).execute()
+
+
+def upsert_processed_features(row: dict):
+    """Insert or update processed feature row for a fixture."""
+    return supabase.table("processed_features").upsert(row, on_conflict="fixture_id").execute()
